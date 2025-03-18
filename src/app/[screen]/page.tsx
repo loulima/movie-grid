@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { notFound } from "next/navigation";
 import { Homepage } from "../screens/homepage";
 import { Series } from "../screens/series";
-import Sobre from "../screens/sobre";
+import { Sobre } from "../screens/sobre";
 
 
 
