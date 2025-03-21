@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState, ReactElement } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react"; 
+import { useState, ReactElement } from 'react';
+import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 export const Navbar = (): ReactElement => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -11,7 +11,7 @@ export const Navbar = (): ReactElement => {
       <div className="flex justify-between items-center max-w-6xl mx-auto">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-black text-3xl md:hidden absolute left-9 top-10"
+          className="text-black text-3xl md:hidden"
           aria-label="Abrir menu"
         >
           {menuOpen ? <X size={30} /> : <Menu size={30} />}
@@ -58,5 +58,3 @@ export const Navbar = (): ReactElement => {
     </nav>
   );
 };
-
-

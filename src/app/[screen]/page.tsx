@@ -4,8 +4,6 @@ import { Homepage } from "../screens/homepage";
 import { Series } from "../screens/series";
 import { Sobre } from "../screens/sobre";
 
-
-
 const screens: Record<string, ReactElement> = {
   homepage: <Homepage />,
   series: <Series />,

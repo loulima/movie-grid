@@ -37,7 +37,7 @@ export const Homepage = (): ReactElement => {
   return (
     <Base>
       {searchTerm ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
           {filteredMovies.length > 0 ? (
             Array.from(new Map(filteredMovies.map((movie) => [movie.id, movie])).values()).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
