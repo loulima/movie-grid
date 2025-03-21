@@ -7,6 +7,7 @@ import { getTopRatedMovies, getNowPlayingMovies, getUpcomingMovies } from '../se
 import { SectionDivider } from '../components/SectionDivider';
 import { useSearch } from '@/context/SearchContext';
 import { MovieCard } from '../components/MovieCard';
+import { MovieModal } from '../components/Modal';
 
 type Movie = {
   id: number;
@@ -22,6 +23,7 @@ export const Homepage = (): ReactElement => {
   const [topRated, setTopRated] = useState<Movie[]>([]);
   const [nowPlaying, setNowPlaying] = useState<Movie[]>([]);
   const [upcoming, setUpcoming] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<number | null>(null); // Controla o modal
 
   useEffect(() => {
     getTopRatedMovies().then(setTopRated);
@@ -39,8 +41,10 @@ export const Homepage = (): ReactElement => {
       {searchTerm ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
           {filteredMovies.length > 0 ? (
-            Array.from(new Map(filteredMovies.map((movie) => [movie.id, movie])).values()).map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+            uniqueFilteredMovies.map((movie) => (
+              <div key={movie.id} onClick={() => setSelectedMovie(movie.id)} className="cursor-pointer">
+                <MovieCard movie={movie} />
+              </div>
             ))
           ) : (
             <p className="text-center text-gray-500">Nenhum filme encontrado.</p>
@@ -49,15 +53,17 @@ export const Homepage = (): ReactElement => {
       ) : (
         <>
           <SectionDivider title="mais bem avaliados" />
-          <MovieCarousel movies={topRated} />
+          <MovieCarousel movies={topRated} setSelectedMovie={setSelectedMovie} />
 
           <SectionDivider title="em exibição nos cinemas" />
-          <MovieCarousel movies={nowPlaying} />
+          <MovieCarousel movies={nowPlaying} setSelectedMovie={setSelectedMovie} />
 
           <SectionDivider title="próximos lançamentos" />
-          <MovieCarousel movies={upcoming} />
+          <MovieCarousel movies={upcoming} setSelectedMovie={setSelectedMovie} />
         </>
       )}
+
+      {selectedMovie && <MovieModal movieId={selectedMovie} onClose={() => setSelectedMovie(null)} />}
     </Base>
   );
 };

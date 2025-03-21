@@ -13,6 +13,8 @@ import { MovieModal } from './Modal';
 type MovieCarouselProps = {
   title?: string;
   movies: any[];
+  setSelectedMovie: (movieId: number) => void;
+
 };
 
 export const MovieCarousel = ({ title, movies }: MovieCarouselProps): ReactElement => {
